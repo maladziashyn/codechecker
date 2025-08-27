@@ -60,9 +60,20 @@ def main():
             if file.endswith(".py"):
                 file_list.append(join(root, file))
 
+    try:
+        with open(
+            join(target_directory, "_dev", "codechecker_ignored.txt"),
+            "r"
+        ) as proj_files:
+            project_files_ignored = [line.strip() for line in proj_files]
+    except FileNotFoundError:
+        project_files_ignored = list()
+    print(f"Ignored: {len(project_files_ignored)}")
+
     check_result = ""
     for file in file_list:
-        if basename(file) not in excluded_files:
+        if (basename(file) not in excluded_files
+            and file not in project_files_ignored):
             try:
                 process = subprocess.run(
                     ["pyflakes", file],
