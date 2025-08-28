@@ -68,7 +68,7 @@ def main():
             project_files_ignored = [line.strip() for line in proj_files]
     except FileNotFoundError:
         project_files_ignored = list()
-    print(f"Ignored: {len(project_files_ignored)}")
+    print(f"Ignore:\t{len(project_files_ignored)}")
 
     check_result = ""
     for file in file_list:
