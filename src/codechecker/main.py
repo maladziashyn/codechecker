@@ -58,14 +58,17 @@ def main():
         dirs[:] = [d for d in dirs if d not in exclude]
         for file in files:
             if file.endswith(".py"):
-                file_list.append(join(root, file))
+                file_list.append(join(target_directory, root, file))
 
     try:
         with open(
             join(target_directory, "_dev", "codechecker_ignored.txt"),
             "r"
         ) as proj_files:
-            project_files_ignored = [line.strip() for line in proj_files]
+            project_files_ignored = [
+                join(target_directory, line.strip())
+                for line in proj_files
+            ]
     except FileNotFoundError:
         project_files_ignored = list()
     print(f"Ignore:\t{len(project_files_ignored)}")

@@ -40,4 +40,4 @@ Run with arguments:
 
 Files listed in `/target/directory/_dev/codechecker_ignored.txt` will be ignored.
 
-Add a full file path per one line.
+Add a relative file path per one line, excluding the project root dirname.
